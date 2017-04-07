@@ -1,0 +1,84 @@
+
+
+body{
+
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+#root, #root > div {
+    height: 100%;
+}
+
+.homeView, .commentView {
+    width: 100%;
+}
+
+.commentView {
+    display: none;
+    background: rgba(255,255,255,0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.commentView .btn-cancel {
+    position: absolute;
+    top:10px;
+    right:10px;
+}
+
+.commentView.open {
+    display: block;
+}
+
+.signview {
+    height: 100%;
+}
+
+.signview > .column {
+    max-width: 495px;
+}
+
+.textbox .field {
+    margin-bottom: 15px;
+}
+
+.commentBox {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+}
+
+.commentBox textarea {
+    width: 100%;
+    border:0;
+    border-bottom:2px solid #cccccc;
+}
+
+.commentBox textarea:focus {
+    border:0;
+    border-bottom:2px solid #00B5AD;
+}
+
+.btn-post{
+    text-align: right !important;
+    margin-top: 10px !important;
+}
+
+.memolist li {
+    margin-bottom: 14px;
+}
+
+.memolist .info .option-button {
+    position: absolute;
+    right:20px;
+    top:15px;
+}
+.memolist .info .option-button > i {
+    margin: 0;
+
+}
