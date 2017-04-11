@@ -10,7 +10,9 @@ class Home extends React.Component {
     render() {
         return (
             <div className="wrapper">
-                <div id="Commentview" className="commentView"><Comment/></div>
+                <div id="Commentview" className="commentView">
+                    <Comment/>
+                </div>
                 <div className="homeView">
                     <Main/>
                     <About/>

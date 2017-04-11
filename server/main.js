@@ -9,7 +9,6 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import CORS from 'cors';
 
-
 /* mongodb connection */
 const db = mongoose.connection;
 db.on('error', console.error);

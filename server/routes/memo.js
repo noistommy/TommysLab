@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
     });
 
     // SAVE IN DATABASE
-    memo.save( err => {
+    Memo.save( err => {
         if(err) throw err;
         return res.json({ success: true });
     });
@@ -229,7 +229,7 @@ router.post('/star/:id', (req, res) => {
             code: 1
         });
     }
- 
+
     // CHECK LOGIN STATUS
     if(typeof req.session.loginInfo === 'undefined') {
         return res.status(403).json({
@@ -237,11 +237,11 @@ router.post('/star/:id', (req, res) => {
             code: 2
         });
     }
- 
+
     // FIND MEMO
     Memo.findById(req.params.id, (err, memo) => {
         if(err) throw err;
- 
+
         // MEMO DOES NOT EXIST
         if(!memo) {
             return res.status(404).json({
@@ -249,13 +249,13 @@ router.post('/star/:id', (req, res) => {
                 code: 3
             });
         }
- 
+
         // GET INDEX OF USERNAME IN THE ARRAY
         let index = memo.starred.indexOf(req.session.loginInfo.username);
- 
+
         // CHECK WHETHER THE USER ALREADY HAS GIVEN A STAR
         let hasStarred = (index === -1) ? false : true;
- 
+
         if(!hasStarred) {
             // IF IT DOES NOT EXIST
             memo.starred.push(req.session.loginInfo.username);
@@ -263,7 +263,7 @@ router.post('/star/:id', (req, res) => {
             // ALREADY starred
             memo.starred.splice(index, 1);
         }
- 
+
         // SAVE THE MEMO
         memo.save((err, memo) => {
             if(err) throw err;
@@ -288,15 +288,15 @@ router.get('/:username', (req, res) => {
         res.json(memos);
     });
 });
- 
- 
+
+
 /*
     READ ADDITIONAL (OLD/NEW) MEMO OF A USER: GET /api/memo/:username/:listType/:id
 */
 router.get('/:username/:listType/:id', (req, res) => {
     let listType = req.params.listType;
     let id = req.params.id;
- 
+
     // CHECK LIST TYPE VALIDITY
     if(listType !== 'old' && listType !== 'new') {
         return res.status(400).json({
@@ -304,7 +304,7 @@ router.get('/:username/:listType/:id', (req, res) => {
             code: 1
         });
     }
-    
+
     // CHECK MEMO ID VALIDITY
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json({
@@ -312,9 +312,9 @@ router.get('/:username/:listType/:id', (req, res) => {
             code: 2
         });
     }
-    
+
     let objId = new mongoose.Types.ObjectId(req.params.id);
-    
+
     if(listType === 'new') {
         // GET NEWER MEMO
         Memo.find({ writer: req.params.username, _id: { $gt: objId }})
