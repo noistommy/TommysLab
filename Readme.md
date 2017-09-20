@@ -2,9 +2,9 @@ Hello!!
 ===========================
 ### Welcome to Tommy`s Lab
 
-start
-	contents
-end
+	start
+		contents
+	end
 
 
-[![forthebadge](http://forthebadge.com/images/badges/gluten-free.svg)](http://forthebadge.com)
+![forthebadge](http://forthebadge.com/images/badges/gluten-free.svg)
