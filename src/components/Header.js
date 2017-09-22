@@ -13,21 +13,24 @@ class Header extends React.Component {
     }
 	render(){
 		const loginButton = (
-			<Menu.Item as={Link} to="/login" icon='privacy' className='vpn_key'/>
+			<Menu.Item as={Link} to="/login" className='vpn_key'>LOG IN</Menu.Item>
 		);
 		const logoutButton = (
-			<div>
-				<Menu.Item link icon='unlock' className='lock_open' onClick={this.props.onLogout}/>
-			</div>
+
+			<Menu.Item link className='lock_open' onClick={this.props.onLogout}>LOG OUT</Menu.Item>
+
 		);
 
 		return (
-			<Menu secondary size="massive">
+			<Menu secondary size="massive" id="Menubar" stackable>
 				<Menu.Item header>
-					<Link to="/">MEMOPAD</Link>
+					<Link to="/">NOISTOMMY.LAB</Link>
 				</Menu.Item>
-				<Menu.Item icon='talk outline' className='btn-comment' onClick={this.addClass}/>
-				<Menu.Item link icon='search' className="material-icons"/>
+				<Menu.Item className='btn-work'>ABOUT</Menu.Item>
+				<Menu.Item className='btn-work'>WORKS</Menu.Item>
+				<Menu.Item className='btn-work'>RESEACH</Menu.Item>
+				<Menu.Item className='btn-work'>CONTACT</Menu.Item>
+				{/*}<Menu.Item as={Link} to="/blog" icon='book' className="btn-blog"/>*/}
 				<Menu.Menu position='right'>
 					{ this.props.currentUser }
 					{ this.props.isLoggedIn ? logoutButton : loginButton }

@@ -34,9 +34,8 @@ router.post('/', (req, res) => {
         writer: req.session.loginInfo.username,
         contents: req.body.contents
     });
-
     // SAVE IN DATABASE
-    Memo.save( err => {
+    memo.save( err => {
         if(err) throw err;
         return res.json({ success: true });
     });
@@ -161,7 +160,7 @@ router.delete('/:id', (req, res) => {
 router.get('/', (req, res) => {
     Memo.find()
     .sort({"_id": -1})
-    .limit(6)
+    .limit(20)
     .exec((err, memos) => {
         if(err) throw err;
         res.json(memos);

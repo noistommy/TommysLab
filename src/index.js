@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import { App, Home, Login, Register, Comment, Wall } from 'containers';
+import { App, Home, Login, Register, Comment, Wall, Blog, InstaContainer } from 'containers';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -21,6 +21,8 @@ ReactDOM.render(
                 <Route path="register" component={Register}/>
                 <Route path="comment" component={Comment}/>
                 <Route path="wall/:username" component={Wall}/>
+                <Route path="blog" component={Blog}/>
+                <Route path="instagram" component={InstaContainer}/>
             </Route>
         </Router>
     </Provider>, rootElement

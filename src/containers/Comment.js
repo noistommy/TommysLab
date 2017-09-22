@@ -21,6 +21,10 @@ class Comment extends React.Component {
         this.loadNewMemo = this.loadNewMemo.bind(this);
         this.loadOldMemo = this.loadOldMemo.bind(this);
         this.removeClass = this.removeClass.bind(this);
+
+        this.state = {
+            loadingState : false
+        };
     }
 
     componentDidMount() {
@@ -39,6 +43,24 @@ class Comment extends React.Component {
                 loadMemoLoop();
             }
         );
+
+        $('#Commentview').scroll(() => {
+            // WHEN HEIGHT UNDER SCROLLBOTTOM IS LESS THEN 250
+            if ($(document).height() - $(window).height() - $(window).scrollTop() < 250) {
+                if(!this.state.loadingState){
+                    this.loadOldMemo();
+                    this.setState({
+                        loadingState: true
+                    });
+                }
+            } else {
+                if(this.state.loadingState){
+                    this.setState({
+                        loadingState: false
+                    });
+                }
+            }
+        });
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -241,6 +263,8 @@ class Comment extends React.Component {
         );
     }
 
+
+
     removeClass() {
         let element = document.getElementById('Commentview');
 		element.classList.remove('open');
@@ -250,11 +274,11 @@ class Comment extends React.Component {
         const write = ( <Write onPost={this.handlePost} /> );
         return (
 
-            <Container>
-                <Button className="btn-cancel" icon basic onClick={this.removeClass}>
+            <div>
+               { /*<Button className="btn-cancel" icon basic onClick={this.removeClass}>
                     <Icon name="cancel"/>
-                </Button>
-                <h1>COMMMENT</h1>
+                </Button> */ }
+                <h1>Comments</h1>
                 <Segment.Group className="commentBox">
                     { this.props.isLoggedIn ? write : undefined }
                     <MemoList data={this.props.memoData}
@@ -264,7 +288,7 @@ class Comment extends React.Component {
                                 onStar={this.handleStar}
                                 />
                 </Segment.Group>
-            </Container>
+            </div>
         );
     }
 }

@@ -1,5 +1,4 @@
 import express from 'express';
-import Fs from 'fs';
 
 const router = express.Router();
 
@@ -28,17 +27,31 @@ router.post('/', (req, res) => {
         });
     }
 
-    Fs.readFile(req.files.uploadFile.path, function(err, data){
-        let filePath = __dirname + "/Tommyfiles/" + req.files.uploadFile.name;
-        Fs.writeFile(filePath, data, function(err){
-            if(err){
-                return res.status(500).json({
-                    error: "UPLAOD FAIL",
-                    code: 3
-                });
-            }else {
-                return res.json({success:true});
-            }
-        });
+    // CREATE NEW BLOG
+    let blog = new Blog({
+        writer: req.session.loginInfo.username,
+        file: req.body.file,
+        title: req.body.title,
+        content: req.body.content
     });
+    // // SAVE IN DATABASE
+    // memo.save( err => {
+    //     if(err) throw err;
+    //     return res.json({ success: true });
+    // });
+
+    // Fs.readFile(req.files.uploadFile.path, function(err, data){
+    //     let filePath = __dirname + "/Tommyfiles/" + req.files.uploadFile.name;
+    //     Fs.writeFile(filePath, data, function(err){
+    //         if(err){
+    //             return res.status(500).json({
+    //                 error: "UPLAOD FAIL",
+    //                 code: 3
+    //             });
+    //         }else {
+    //             return res.json({success:true});
+    //         }
+    //     });
+    // });
 });
+export default router;

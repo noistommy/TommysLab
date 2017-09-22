@@ -1,6 +1,6 @@
 import React from 'react';
 import { Memo } from 'components';
-import { Segment } from 'semantic-ui-react';
+import { Segment, Image, List } from 'semantic-ui-react';
 
 class MemoList extends React.Component {
 
@@ -8,7 +8,7 @@ class MemoList extends React.Component {
         let update = JSON.stringify(this.props) !== JSON.stringify(nextProps);
         return update;
     }
-    
+
     render() {
         const mapToComponents = data => {
             return data.map((memo, i) => {
@@ -27,9 +27,9 @@ class MemoList extends React.Component {
 
         return (
             <Segment>
-                <ul className="memolist">
+                <List className="memolist">
                     {mapToComponents(this.props.data)}
-                </ul>
+                </List>
             </Segment>
         );
     }
@@ -46,11 +46,11 @@ MemoList.propTypes = {
 MemoList.defaultProps = {
     data: [],
     currentUser: '',
-    onEdit: (id, index, contents) => { 
-        console.error('edit function not defined'); 
+    onEdit: (id, index, contents) => {
+        console.error('edit function not defined');
     },
-    onRemove: (id, index) => { 
-        console.error('remove function not defined'); 
+    onRemove: (id, index) => {
+        console.error('remove function not defined');
     },
     onStar: (id, index) => {
         console.error('star function not defined');

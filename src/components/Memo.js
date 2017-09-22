@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Segment, Dropdown, Icon, Button, Comment, TextArea } from 'semantic-ui-react';
+import { Segment, Dropdown, Icon, Button, Comment, TextArea, List } from 'semantic-ui-react';
 import TimeAgo from 'react-timeago';
 
 class Memo extends React.Component {
@@ -15,13 +15,13 @@ class Memo extends React.Component {
         this.handleStar = this.handleStar.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
-    
+
     toggleEdit() {
         if(this.state.editMode) {
             let id = this.props.data._id;
             let index = this.props.index;
             let contents = this.state.value;
-            
+
             this.props.onEdit(id, index, contents).then(() => {
                 this.setState({
                     editMode: !this.state.editMode
@@ -30,7 +30,7 @@ class Memo extends React.Component {
         } else {
             this.setState({
                 editMode: !this.state.editMode
-            });   
+            });
         }
     }
 
@@ -43,9 +43,9 @@ class Memo extends React.Component {
     handleStar() {
         let id = this.props.data._id;
         let index = this.props.index;
-        this.props.onStar(id, index); 
+        this.props.onStar(id, index);
     }
-    
+
 
     handleChange(e) {
         this.setState({
@@ -58,12 +58,12 @@ class Memo extends React.Component {
             props: this.props,
             state: this.state
         };
-        
+
         let next = {
             props: nextProps,
             state: nextState
         };
-        
+
         let update = JSON.stringify(current) !== JSON.stringify(next);
         return update;
     }
@@ -92,26 +92,26 @@ class Memo extends React.Component {
         );
         let starStyle = (this.props.data.starred.indexOf(this.props.currentUser) > -1) ? { color: '#ff9980' } : {} ;
         const memoView = (
-            
+
                 <Comment.Group>
                     <Comment>
                       <Comment.Content>
                         <Comment.Author as='a'> {this.props.data.writer}</Comment.Author>
                         <Comment.Metadata>
-                          <div>wrote a log · <TimeAgo date={this.props.data.date.created}/>{ this.props.data.is_edited ? editedInfo : undefined }</div>
-                          <div>
-                            <Icon name='star' style={starStyle} onClick={this.handleStar} />
-                            {data.starred.length} Faves
-                          </div>
+                          <div>wrote a log · <TimeAgo date={this.props.data.date.created}/></div>
                         </Comment.Metadata>
                         <Comment.Text>
                           {data.contents}
                         </Comment.Text>
+                        <div className="favorits">
+                          <Icon name='heart' style={starStyle} onClick={this.handleStar} />
+                          좋아요 {data.starred.length}
+                        </div>
                         { ownership ? commentActions : undefined }
                       </Comment.Content>
                     </Comment>
               </Comment.Group>
-           
+
         );
         const editView = (
             <Segment.Group raised>
@@ -128,9 +128,9 @@ class Memo extends React.Component {
             </Segment.Group>
             )
         return (
-            <li>
+            <List.Item>
                 { this.state.editMode ? editView : memoView }
-            </li>
+            </List.Item>
         );
     }
 }
@@ -163,8 +163,8 @@ Memo.defaultProps = {
         console.error('onEdit function not defined');
     },
     index: -1,
-    onRemove: (id, index) => { 
-        console.error('remove function not defined'); 
+    onRemove: (id, index) => {
+        console.error('remove function not defined');
     },
     onStar: (id, index) => {
         console.error('star function not defined');

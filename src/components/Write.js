@@ -15,7 +15,6 @@ class Write extends React.Component {
     }
 
     handleChange(e) {
-        console.log("change");
         this.setState({
             contents: e.target.value
         });
@@ -23,7 +22,6 @@ class Write extends React.Component {
 
     handlePost() {
         let contents = this.state.contents;
-        console.log("click"+contents);
         this.props.onPost(contents).then(
             () => {
                 this.setState({
@@ -38,13 +36,13 @@ class Write extends React.Component {
                 <Segment>
                     <TextArea name='comment' rows='3' placeholder='Write down your comment.' value={this.state.contents}
                             onChange={this.handleChange} />
-                
+
                     <Button className="btn-post" color='teal' onClick={this.handlePost}>
                         <Icon name='write'/>
                         POST
                     </Button>
                 </Segment>
- 
+
         )
     }
 }

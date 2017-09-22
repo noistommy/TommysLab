@@ -7,7 +7,6 @@ import bodyParser from 'body-parser'; // PARSE HTML BODY
 import api from './routes';
 import mongoose from 'mongoose';
 import session from 'express-session';
-import CORS from 'cors';
 
 /* mongodb connection */
 const db = mongoose.connection;
@@ -35,7 +34,6 @@ app.use(session({
     store:require('mongoose-session')(mongoose)
 }));
 
-// app.use(CORS);
 
 // app.use(function(req, res, next) {
 //     res.header('Acess-Control-Allow-Origin', '*');
